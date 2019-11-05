@@ -1,0 +1,92 @@
+dict[] = ["Hi", "Hello", "HelloWorld",  "HiTech", "HiGeek", 
+"HiTechWorld", "HiTechCity", "HiTechLab"]
+
+For pattern "HT",
+Output: ["HiTech", "HiTechWorld", "HiTechCity", "HiTechLab"]
+
+For pattern "H",
+Output: ["Hi", "Hello", "HelloWorld",  "HiTech", "HiGeek", 
+    "HiTechWorld", "HiTechCity", "HiTechLab"]
+
+For pattern "HTC",
+Output: ["HiTechCity"]
+
+
+
+
+struct TrieNode {
+  TrieNode *child[26];
+  isLeaf;
+  list<string> words;
+}
+struct TrieNode *getNewTrieNode()
+{
+  struct TrieNode *pNode = new TrieNode;
+  if(pNode)
+  {
+    pNode->isLeaf = false;
+    for (int i = 0; i<26; i++)
+    {
+      pNode->child[i] = NULL;
+    }
+  }
+  return pNode;
+}
+
+void insert(struct TrieNode *root, string word)
+{
+    int index;
+    struct TrieNode *curr = root;
+    for(int i = 0; i<word.length(); i++)
+    {
+      if(isLower(word[i]))
+        continue;
+      int index = word[i] - 'A';
+      curr->child[index] = getNewTrieNode();
+      curr = curr->child[index];
+    }
+    curr->isLeaf = true;
+    words.push_back(word);
+}
+
+void printAllWords(TrieNode *root)
+{
+ if(root->leaf)
+ {
+    for(string str: root->word)
+    {
+        cout<<str<<endl;
+    }
+ }
+ for(int i = 0; i<26;i++)
+ {
+    TrieNode *child = root->child[i];
+    if(child)
+        printAllWords[child];
+ }
+}
+void search( TrieNode * root, string pattern)
+{
+  struct TrieNode *curr = root;
+  for(int i=0; i<pattern.length(); i++)
+  {
+      int index = pattern[i]-'A';
+      if(!curr ->child[index])
+          return false;
+      curr = curr->child[index];
+  }
+  printAllWords(curr);
+  return true;
+}
+void findAllWords(vector<string> dict, string pattern)
+{
+  TrieNode *root;
+  for(auto str: dict)
+  {
+    insert(root, str);
+  }
+  if(!search(root, pattern))
+  {
+    cout<<"patten Not found";
+  }
+}
