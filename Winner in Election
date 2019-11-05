@@ -1,0 +1,32 @@
+Find winner of an election where votes are represented as candidate names
+Input :  votes[] = {"john", "johnny", "jackie", 
+                    "johnny", "john", "jackie", 
+                    "jamie", "jamie", "john",
+                    "johnny", "jamie", "johnny", 
+                    "john"};
+Output : John
+We have four Candidates with name as 'John', 
+'Johnny', 'jamie', 'jackie'. The candidates
+John and Johny get maximum votes. Since John
+is alphabetically smaller, we print it.
+
+
+string findWinner(string votes[])
+{
+    map<string, int> mp;
+    for(s : votes)
+    {
+        mp[s]++;
+    }
+    int max = -1;
+    string answer;
+    for(auto it = mp.begin(); it != mp.end(); it++)
+    {
+        if(max < it->second)
+        {
+            max=it->second;
+            answer = it->first;
+        }
+    }
+    return answer;
+}
