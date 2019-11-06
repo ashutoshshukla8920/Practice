@@ -30,7 +30,7 @@ void stringIgnorance(vector<string> str)
 }
 string stringIgnoranceUtil(string str)
 {
-  map<char, int> mp;
+  unordered_map<char, int> mp;
   string result;
   
   for(int i = 0; i<str.length(); i++)
