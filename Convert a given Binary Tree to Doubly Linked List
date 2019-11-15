@@ -1,0 +1,20 @@
+Convert a given Binary Tree to Doubly Linked List
+
+void BinaryTreeToList(struct node *root, struct node **head)
+{
+   if(root == NULL)
+      return;
+   static struct node *prev =  NULL;
+   BinaryTreeToList(root->left, head);
+   if(prev == NULL)
+   {
+     *head = root;
+   }
+   else
+   {
+      root->left = prev;
+      prev->right = root;
+   }
+   prev = root;
+   BinaryTreeToList(root->right, head);
+}
