@@ -1,0 +1,31 @@
+Given two strings str1 and str2 and below operations that can performed on str1. Find minimum number of edits (operations) required to convert ‘str1’ into ‘str2’.
+
+Insert
+Remove
+Replace
+
+Input:   str1 = "geek", str2 = "gesek"
+Output:  1
+We can convert str1 into str2 by inserting a 's'.
+
+
+int editDistance(string str1, string str2, int m, int n)
+{
+   int dp[m+1][n+1];
+   for(int i =0; i<m; i++)
+   {
+    for(int j =0; j<n; j++)
+    {
+       if(i == 0)
+          dp[i][j] = j;
+       else if(j == 0)
+          dp[i][j] = i;
+       else if(str[i] == str[j])
+           dp[i][j] = dp[i-1][j-1];
+       else
+           dp[i][j] = 1+min( dp[i-1][j], dp[i][j-1], dp[i-1][j-1]);
+
+    }
+   }
+   return dp[m][n];
+}
