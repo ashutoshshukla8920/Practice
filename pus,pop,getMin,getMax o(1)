@@ -1,0 +1,86 @@
+// getMin , push, pop in 0(1) time in stack
+struct Mystack
+{
+   stack<int> s;
+   int minElement;
+   void getMin()
+   {
+      if(s.empty())
+         cout<<"stack is empty";
+      else
+         cout<<minElement;
+   }
+   void push(int x)
+   {
+       if(s.empty())
+       {
+          minElement = x;
+          s.push(x);
+          cout<<"Number inserted "<<x<<endl;
+          return;
+       }
+       if(x < minElement)
+       {
+          s.push(2*x-minElement)
+          minElement = x;
+       }
+       else
+           s.push(x);
+       cout<< "Number pushed is x:""<<x
+   }
+   void pop()
+   {
+       if(s.empty())
+       {
+          cout<<"stack is empty()"<<endl;
+          return;
+       }
+       cout<<"Top of element"<<s.top();
+       int t = s.top();
+       if(t < minElement)
+       {
+          cout<<minElement<<endl;
+          minElement = 2*minElement-t;
+       }
+       else
+           cout<<t<<endl;
+   }
+}
+struct MyStack {
+  stack<int> s;
+  int maxElement;
+    void push(int x)
+    {
+      if(s.empty())
+      {
+        maxElement = x;
+        s.push(x);
+        cout<<"inserted x"<<x<<endl;
+      }
+      if(x > maxElement)
+      {
+         s.push(2*x - maxElement)
+         maxElement = x;
+      }
+      else
+          s.push(x);
+      cout<<"inserted x"<<x;
+    }
+
+    void pop()
+    {
+       if(s.empty())
+       {
+          cout<<"stack is Empty:"<<endl;
+          return;
+       }
+       cout<<s.top()<<endl;
+       int t = s.top();
+       if(t > maxElement)
+       {
+          cout<<maxElement<<endl;
+          maxElement = 2*maxElement-t;
+       }
+       else
+          cout<<t<<endl;
+    }
