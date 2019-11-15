@@ -1,0 +1,29 @@
+/ Element with left side smaller and right side greater
+Given an unsorted array of size N. Find the first element in array such that all of its left elements are smaller and all right elements to it are greater than it.
+
+Note: Left and right side elements can be equal to required element. And extreme elements cannot be required element.
+
+Input:
+The first line of input contains an integer T denoting the number of test cases. Then T test cases follow. Each test case consists of two lines. First line of each test case contains an Integer N denoting size of array and the second line contains N space separated array elements.
+
+Output:
+For each test case, in a new line print the required element. If no such element present in array then print -1.
+
+int findElement(int arr[], int n)
+{
+   int leftMax[n];
+   leftMax[0] = INT_MIN;
+   for(int i =1; i< n; i++)
+   {
+     leftMax[i] = max[left[i-1], arr[i-1]];
+   }
+   int rightMin = INT_MAX;
+   for(int i = n-1; i>=0 ; i--)
+   {
+      if(leftMax[i] < arr[i] && rightMin > arr[i])
+         return i;
+
+      rightMin = min(rightMin, arr[i]);
+   }
+   return -1;
+}
