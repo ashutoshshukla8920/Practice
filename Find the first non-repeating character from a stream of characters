@@ -1,0 +1,83 @@
+//Find the first non-repeating character from a stream of characters
+
+create DLL of size 256
+create visited array of size 256 -->bool
+
+char x from stream
+if x is not present in visited
+mark visited[x] = true;
+append character in the dll;
+if visited[x] == true and visited more than 2 times
+    ignore it
+if visited[x] == true and visited only once remove it from DLL
+
+
+struct node{
+char a;
+struct node *next, *prev;
+}
+
+void appendDLL(struct node** head, struct node *tail, char x)
+{
+   struct node *temp = new struct node;
+   temp->a = x;
+   temp->prev= temp->next = NULL;
+   if(*head == NULL)
+   {
+      *head = *tail = temp;
+      return;
+   }
+   (*tail)->next = temp;
+   temp->prev = *tail;
+   *tail = temp;
+
+}
+
+void removeDLL(struct node** head, struct node** tail, struct node *temp)
+{
+  if(head == NULL)
+    return;
+
+  if(*head == temp)
+     *head = *head->next;
+  if(*tail == temp)
+     *tail = tail->prev;
+  if(temp->next != NULL)
+    temp->next->prev = temp->prev;
+  if(temp->prev != NULL)
+  temp->prev->next = temp->next;
+
+  delete(temp);
+}
+void findFirstNonRepeatingCharacter(string stream)
+{
+  struct node* DLL[256];
+  bool visited[256];
+  for(int i =0; i< 256; i++)
+  {
+     DLL[i] = NULL;
+     visited[i] = NULL;
+  }
+  struct node *head=NULL, *tail=NULL;
+  for(int i = 0; i<stream[i]; i++)
+  {
+    char x = stream[i];
+    if(visited[x] == false)
+    {
+       if(DLL[x] == NULL){
+          appendDLL(&head, &tail, stream[i]);
+          inDLL[x] = tail;
+       }
+       else
+       {
+          removeDLL(&head, &tail, inDLL[x]);
+          inDLL[x] = NULL;
+          visited[x] = true;
+       }
+    }
+    if(head != NULL)
+    {
+      cout<<head->a<<endl;
+    }
+  }
+}
