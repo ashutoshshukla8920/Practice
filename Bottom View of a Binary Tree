@@ -1,0 +1,48 @@
+//Bottom View of a Binary Tree
+
+                20
+               /    \
+             8       22
+           /   \      \
+         5      3      25
+               / \
+             10    14
+
+For the above tree the output should be 5, 10, 3, 14, 25.
+
+ map is of hd and data;
+
+struct node {
+  int data;
+  int hd;
+  struct node *left, right;
+}
+void printBootomView(struct Node *root)
+{
+   map<int, int> mp;
+   queue<struct node *> q;
+   int hd = 0;
+   root->hd = hd;
+   q.push(root->data);
+   while(!q.empty()){
+       struct node* temp = q.front();
+       q.pop();
+       hd = temp->hd;
+       m[hd] = temp->data;
+       if(temp->left != NULL)
+       {
+          temp->hd = hd-1;
+          q.push(temp->left);
+       }
+       if(temp->right != NULL)
+       {
+          temp->hd = hd+1;
+          q.push(temp->right);
+       }
+   }
+   for(auto it : mp)
+   {
+      cout<<it->second<<" ";
+   }
+
+}
