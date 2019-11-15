@@ -1,0 +1,60 @@
+//Kth smallest element
+Given an array arr[] and a number K where K is smaller than size of array, the task is to find the Kth smallest element in the given array. It is given that all array elements are distinct.
+
+Expected Time Complexity: O(n)
+
+int findMadian(int arr[], int n)
+{
+   sort(arr, arr+n);
+   return arr[n/2];
+}
+int kthsmallest(int arr[], int l, int r, int k)
+{
+  if(k > 0 && k < r-l+1)
+  {
+    int median[(n+4)/5];
+    for(int i = 0; i<n/5; i++)
+    {
+        median[i] = findMadian(arr+l+i*5, 5);
+    }
+    if(i*5 < n)
+    {
+      median[i] = findMadian(arr+l+i*5, n%5);
+    }
+
+    int medOfMed = i==1 ? median[i-1] : kthsmallest(median, 0, i-1, i/2);
+    int index = randomPartition(arr, l, r, medOfMed);
+    if(index-1 == k-1)
+        return arr[index];
+    else if(index-1 > k-1)
+        return kthsmallest(arr, l, index+1, k);
+    else
+    {
+        return kthsmallest(arr, index+1, r, k-pos+l-1);
+    }
+    return INT_MAX;
+}
+
+int randomPartition(int arr[], int l, int r, int x)
+{
+   //serach x in array and move it to end
+
+   for(int i = l; i<r;i++)
+   {
+      if(arr[i] == x)
+        break;
+   }
+   swap(arr[i], arr[r]);
+
+   int i = l;
+   for(int j = l ; j <= r-1; j++)
+   {
+       if(arr[j] <= x)
+       {
+           swap(arr[i], arr[j])
+           i++;
+       }
+   }
+   swap(arr[i], arr[r]);
+   return i;
+}
