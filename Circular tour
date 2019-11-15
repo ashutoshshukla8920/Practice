@@ -1,0 +1,34 @@
+//Circular tour
+
+Suppose there is a circle. There are N petrol pumps on that circle. You will be given two sets of data.
+1. The amount of petrol that every petrol pump has.
+2. Distance from that petrol pump to the next petrol pump.
+
+we will be calculating deficit and usage of tank
+we will check the amount of travel i to i+1 in tank
+gas[i]-cost[i]
+if tank < 0
+   we are at deficit will update it as deficit+=tank;
+   start = i+1 we will start from next pointer
+   and set tank = 0;
+
+   if deficit+tank >=0 return start else return -1;
+
+
+
+int canCompleteCircle(int gas[], in cost[], int n)
+{
+   int tank =0, deficit = 0;
+   for(int i  = 0; i<n ;i++)
+   {
+      tank += gas[i]-cost[i];
+      if(tank < 0)
+      {
+         deficit+= tank;
+         start = i+1;
+         tank = 0;
+      }
+   }
+   return tank+deficit >= 0? start:-1;
+}
+
