@@ -1,0 +1,52 @@
+/Reverse a linked list
+
+Method 1: 3 pointers
+void reverse(struct node *head)
+{
+   if(head == NULL || head->next == NULL)
+      return;
+   struct node *prev = NULL;
+   struct node *curr = head;
+   struct node *next;
+
+   while(curr != NULL)
+   {
+      next = curr->next;
+      curr->next = prev;
+      prev = curr;
+      curr = next;
+   }
+  head = prev;
+}
+
+//Recursive solution
+
+struct node* reverse(struct node* head)
+{
+  if(head == NULL || head->next == NULL)
+    return NULL;
+  struct node *rest = reverse(head->next);
+  head->next->next = first;
+  head->next = NULL;
+  return rest;
+}
+
+//2 pointer solution
+next = curr->next
+curr->next = next->next;
+next->next = head;
+head = next;
+
+
+
+void reverse(struct node* head)
+{
+  struct node *curr = head;
+  while(curr->next != NULL)
+  {
+    next = curr->next;
+    curr->next = next->next;
+    next->next = head;
+    head = next;
+  }
+}
