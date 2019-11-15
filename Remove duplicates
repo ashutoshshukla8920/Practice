@@ -1,0 +1,16 @@
+Given a string S, the task is to remove all the duplicates in the given string.
+
+char *removeDuplicates(char *s)
+{
+  unorderd_map<char, int> exist;
+  int index = 0;
+  for(i = 0; i<n ;i++)
+  {
+    if(exist[s[i]] == 0)
+    {
+      s[index++] = s[i];
+      exist[s[i]]++;
+    }
+  }
+  return s;
+}
