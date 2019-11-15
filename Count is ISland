@@ -1,0 +1,51 @@
+//Count is ISland
+
+mat[M][N] =  {{'O', 'O', 'O'},
+              {'X', 'X', 'O'},
+              {'X', 'X', 'O'},
+              {'O', 'O', 'X'},
+              {'O', 'O', 'X'},
+              {'X', 'X', 'O'}
+             };
+Output: Number of islands is 3
+
+mat[M][N] =  {{'X', 'O', 'O', 'O', 'O', 'O'},
+              {'X', 'O', 'X', 'X', 'X', 'X'},
+              {'O', 'O', 'O', 'O', 'O', 'O'},
+              {'X', 'X', 'X', 'O', 'X', 'X'},
+              {'X', 'X', 'X', 'O', 'X', 'X'},
+              {'O', 'O', 'O', 'O', 'X', 'X'},
+             };
+Output: Number of islands is 4
+
+int countIsland(int M[R][C])
+{
+   bool visited[R][C];
+   memset(visited, 0, sizeof(visited));
+   int count = 0;
+   for(int i = 0; i<R; i++)
+     for(int j = 0; j<C; j++)
+     {
+        if(M[i][j] && !visited[i][i]){
+            DFSUtils(M[][],i, j, visited);
+            count++;
+        }
+     }
+     return count;
+}
+
+bool isSafe(int M[][], int i, int j, visited[][])
+{
+   return (i >= 0 && i < M && j >=0 && j <M && !visited[i][j] && M[i][j]);
+}
+bool DFSUtils(int M[R][C], int i , int j, bool visited[][])
+{
+    static int rowNbr[] = { -1, -1, -1, 0, 0, 1, 1, 1 };
+    static int colNbr[] = { -1, 0, 1, -1, 1, -1, 0, 1 };
+    visited[i][j] = true;
+      for(int k = 0; k<8; k++)
+      {
+          if(isSafe(M, i+rowNbr[k], j+colNbr[k], visited))
+               DFSUtils(M, i+rowNbr[k], j+colNbr[k], visited )
+      }
+}
