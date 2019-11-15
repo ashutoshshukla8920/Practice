@@ -1,0 +1,64 @@
+Input Tree
+       A
+      / \
+     B   C
+    / \   \
+   D   E   F
+
+Output Tree
+       A--->NULL
+      / \
+     B-->C-->NULL
+    / \   \
+   D-->E-->F-->NULL
+
+struct node {
+int data;
+struct node *left, *right, *nextRight;
+}
+
+void connect(struct node *root)
+{
+   root->nextRight = NULL;
+   connectRecur(root);
+}
+
+void connectRecur(struct node *p)
+{
+   if(p == NULL)
+      return;
+   if(p->nextRight != NULL)
+     connectRecur(p->nextRight);
+    if(p->left)
+    {
+       if(p->right){
+          p->left->nextRight= p->right;
+          p->right->nextRight = getNextRight(p);
+          }
+       else
+           p->left = getNextRight(p);
+       connectRecur(p->left);
+    }
+    else if(p->right)
+    {
+       p->right->nextRight = getNextRight(p);
+       connectRecur(p->right);
+    }
+    else
+        connectRecur(getNextRight(p->nextRight));
+}
+
+struct node* getNextRight(struct node *p)
+{
+   struct node *temp = p->nextRight;
+   while(temp != NULL)
+   {
+      if(temp->left)
+          return temp->left;
+      if(temp->right)
+          return temp->right;
+      temp = temp->nextRight;
+   }
+   return NULL;
+}
+
