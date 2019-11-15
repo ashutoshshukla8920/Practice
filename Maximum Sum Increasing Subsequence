@@ -1,0 +1,19 @@
+Maximum Sum Increasing Subsequence
+if input is {1, 101, 2, 3, 100, 4, 5}, then output should be 106 (1 + 2 + 3 + 100),
+
+int maxSumIS(int arr[], int n)
+{
+  int i, j, max =0;
+  int msis[n];
+  for(i = 0; i<n; i++)
+     msis[i] = arr[i];
+  for(i =1; i<n ;i++)
+  {
+    for(j=0; j<i; j++)
+    {
+      if(arr[i] > arr[j] && msis[i] < msis[j]+arr[i])
+            msis[i] = msis[j] + arr[i];
+    }
+  }
+  return *max_element(msis, msis+n);
+}
