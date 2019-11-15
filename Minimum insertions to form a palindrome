@@ -1,0 +1,20 @@
+// Minimum insertions to form a palindrome
+
+ab: Number of insertions required is 1 i.e. bab
+
+int findMinimumInsertion(string str)
+{
+   int n = str.length
+   int table[n][n];
+   int l =0;
+   int h = n-1;
+   for(int gap = 1; gap < n; gap++)
+   {
+     for(int l =0, h = gap; h < n; l++, h++ )
+     {
+        table[l][h] = (str[l] == str[h]) ? table[l-1][h-1] :
+                       min(table[l+1][h], table[l][h-1])+1;
+     }
+   }
+   return table[0][n-1];
+}
