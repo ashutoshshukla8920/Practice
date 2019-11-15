@@ -1,0 +1,21 @@
+Diameter of a Binary Tree
+
+int diameter(struct node *root)
+{
+   if(root == NULL)
+     return 0;
+
+    int lheight = height(root->left);
+    int rheight = height(root->right);
+
+    int ldiameter = diameter(root->left);
+    int rdiameter = diameter(root->right);
+
+    return (lheight+rheight+1, max(ldiameter, rdiameter));
+}
+int height(struct node *root)
+{
+  if(root == NULL)
+    return 0;
+  return 1+max( height(root->left), height(root->right));
+}
