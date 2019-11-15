@@ -1,0 +1,24 @@
+Check for BST
+
+rule : if tree is BST only if left subchild less than root and right subchild is greater than root
+
+logic we will check the while traversing the root should be less than left subchild
+we will pass it's minimum value to root->data -1
+simmillarly for right chil root->data+1;
+
+
+bool isBST( struct node *root)
+{
+    return isBSTUtil(root, INT_MIN, INT_MAx);
+}
+
+bool isBSTUtil(struct node *root, int min, int max)
+{
+   if(root == NULL)
+      return true;
+
+  if(root->data < min || root->data > max)
+      return 0;
+
+     return (isBSTUtil(root->left, min, root->data-1) && isBSTUtil(root->right, root->data+1, max));
+}
