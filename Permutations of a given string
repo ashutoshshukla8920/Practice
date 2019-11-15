@@ -1,0 +1,25 @@
+//Permutations of a given string
+
+Input:
+2
+ABC
+ABSG
+
+Output:
+ABC ACB BAC BCA CAB CBA
+ABGS ABSG AGBS AGSB ASBG ASGB BAGS BASG BGAS BGSA BSAG BSGA GABS GASB GBAS GBSA GSAB GSBA SABG SAGB SBAG SBGA SGAB SGBA
+
+void permute(string str, int low, int high)
+{
+
+  if( low == high)
+      cout<<str<<endl;
+  else{
+    for(int i = low; i<=high; i++)
+    {
+      swap(str[low], str[i]);
+      permute(str, low+1, high);
+      swap(str[low], str[i]);
+    }
+  }
+}
