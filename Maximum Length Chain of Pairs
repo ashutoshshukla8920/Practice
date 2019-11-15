@@ -1,0 +1,44 @@
+//Maximum Length Chain of Pairs
+
+You are given n pairs of numbers. In every pair, the first number is always smaller than the second number. A pair (c, d) can follow another pair (a, b) if b < c. Chain of pairs can be formed in this fashion. Find the longest chain which can be formed from a given set of pairs.
+
+For example, if the given pairs are {{5, 24}, {39, 60}, {15, 28}, {27, 40}, {50, 90} }, then the longest chain that can be formed is of length 3, and the chain is {{5, 24}, {27, 40}, {50, 90}}
+
+DP solution LIS o(n^2)
+
+struct Pair{
+int a;
+int b;
+};
+
+int maxChainLength(Pair arr[], int n)
+{
+   int i, j, max = 0;
+   int mcl[n] = {1};
+   for(i =1 ; i<n; i++)
+   {
+      for(int j = 0; j <i; j++)
+      if(arr[i].a > arr[j].b && mcl[i] < mcl[j] +1)
+         mcl[i] = mcl[j]+1;
+   }
+   return (maxElementOfarray(mcl));
+}
+
+o(nlogn) --> greedy approach
+bool chainCompare(Pair p1, Pair p2)
+{
+   return p1.b < p2.b;
+}
+
+void PrintMaxChainLength(Pair arr[], int n)
+{
+   sort(arr, arr+n, chainCompare);
+   int i = 0;
+   cout<<arr[i].a<<" "<<arr[i].b<<endl;
+   for(j = 1; j< n; j++)
+   {
+      if(arr[j].a >= arr[i].b)
+         cout<<arr[j].a<<" "<<arr[j].b<<endl;
+         i = j;
+   }
+}
