@@ -1,0 +1,21 @@
+Minimum number of jumps to reach end
+Input: arr[] = {1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9}
+Output: 3 (1-> 3 -> 8 ->9)
+
+int minJumps(int arr[], int n)
+{
+  int jumps[n] = {INT_MAX};
+  if( n== 0 || arr[0] == 0)
+    return INT_MAX;
+  jumps[0] = 0;
+  for(i = 1; i < n; i++)
+    for(j = 0; j < i ; j++)
+    {
+        if(i <= j+arr[j] && jumps[j] != INT_MAX)
+        {
+            jumps[i] = min(jumps[i], jumps[j]+1);
+            break;
+        }
+    }
+    return jumps[n-1];
+}
