@@ -1,0 +1,33 @@
+Maximum Path Sum in a Binary Tree
+
+Input: Root of below tree
+       1
+      / \
+     2   3
+Output: 6
+
+See below diagram for another example.
+1+2+3
+
+option 1: node only
+option 2 : max through left child and Node
+option 3: max through right child and Node
+option 4: max through left child + node + max sum through right child
+
+void findMaxPathSum(struct node *root)
+{
+    int res = INT_MIN;
+    res = findMaxPathSumUtil(root, &res);
+}
+
+int findMaxPathSumUtil(struct node *root, int &res)
+{
+   if(root == NULL)
+      return 0;
+   int l = findMaxPathSumUtil(root->left, res);
+   int r = findMaxPathSumUtil(root->right, res);
+
+   int max_single = max(max(l,r)+root->data, root->data);
+   int max_top = max(max_single, l+r+root->data);
+   return max(res, max_top);
+}
