@@ -1,0 +1,22 @@
+Find winner of an election where votes are represented as candidate names
+
+
+string findWinner(string votes[])
+{
+    map<string, int> mp;
+    for(s : votes)
+    {
+        mp[s]++;
+    }
+    int max = -1;
+    string answer;
+    for(auto it = mp.begin(); it != mp.end(); it++)
+    {
+        if(max < it->second)
+        {
+            max=it->second;
+            answer = it->first;
+        }
+    }
+    return answer;
+}
