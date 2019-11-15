@@ -1,0 +1,28 @@
+Remove Minimum coins such that absolute difference between any two piles is less than K
+
+Input: arr[] = {2, 2, 2, 2}, K = 0
+Output: 0
+For any two piles the difference in the number of coins is ≤ 0.
+So, no need to remove any coins.
+
+Input: arr[] = {1, 5, 1, 2, 5, 1}, K = 3
+Output: 2
+If we remove one coin each from both the piles containing
+5 coins, then for any two piles the absolute difference
+in the number of coins is ≤ 3.
+
+
+int minimumCoins (int arr[], int n, int k)
+{
+  int cnt = 0;
+  int minVal = *min_element(arr, arr+n);
+  for(i = 0; i<n; i++)
+  {
+      int diff  = arr[i] - minVal;
+      if(diff > k)
+      {
+         cnt+=diff-k;
+      }
+  }
+  return cnt;
+}
