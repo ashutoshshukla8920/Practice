@@ -28,7 +28,7 @@ int merge(int arr[], int left, int right, int mid)
      else
      {
         temp[k++] = arr[j++];
-        inv_count++;
+        inv_count = inv_count + (mid -i);
       }
   }
   while(i<=mid-1)
