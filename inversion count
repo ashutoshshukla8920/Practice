@@ -10,7 +10,7 @@ int mergesort(int arr[], int temp[], int left, int right)
   if(right > left)
   {
       mid = right + (right - left)/2;
-      inv_count = mergesort(arr, left, mid);
+      inv_count += mergesort(arr, left, mid);
       inv_count += mergesort(arr, mid+1, right);
       inv_count += merge(arr, left, right, mid);
   }
