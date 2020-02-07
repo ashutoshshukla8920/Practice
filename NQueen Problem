@@ -28,7 +28,7 @@ bool SolveNQUtil(int board[][], int col)
        if(isSafe(board, i, col))
        {
            board[i][col] = 1;
-           if(SolveNQUtil(board, 1))
+           if(SolveNQUtil(board, col+1))
               return true;
             board[i][col] = 0;
        }
